@@ -1,0 +1,25 @@
+#root {
+  max-width: 1280px;
+  text-align: center;
+}
+
+@media (orientation: portrait) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+.container{
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+.container > *{
+  flex:1;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(134, 120, 120);
+}
