@@ -1,0 +1,164 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, li, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a background image to the entire page */
+body {
+    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #ffb15c; /* Background color for the body */
+    background-image: url('logo.jpg'); /* Replace 'bg1.jpg' with your image file */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: black; /* Text color */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header styles */
+header {
+    
+    padding: 20px;
+    text-align: center;
+    background-color: #D45A0F;
+    color: antiquewhite;
+    font-family: 'Montserrat Subrayada', sans-serif;
+}
+
+/* Main container styles */
+.contact-container {
+    background-color: #FFC085;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+/* Contact Information styles */
+.contact-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.contact-person {
+    margin-bottom: 20px;
+}
+
+/* Contact Form styles */
+.contact-form {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Style the "Open Contact Form" button */
+#openContactButton {
+    background-color: #B54709;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#openContactButton:hover {
+    background-color:  #B54709;
+}
+
+/* Footer styles */
+footer {
+    
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    background-color: #D45A0F;
+    color: antiquewhite;
+    font-family: 'Montserrat Subrayada', sans-serif;
+}
+
+/* Overlay styles */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+    z-index: 1;
+    overflow: auto;
+}
+
+/* Contact Form Overlay styles */
+.contact-form-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffb15c;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Close button styles */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #ff0000;
+}
+
+/* Form styles */
+form label, form input, form textarea, form button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #D45A0F
+    ;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background-color: #B54709;
+}
+
+/* Default light mode styles */
+:root {
+    --bg-color: #FFDAB9;
+    --text-color: black;
+}
+
+body {
+    background-image: url('bg1.jpg'); /* Replace 'background.jpg' with your image file */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}

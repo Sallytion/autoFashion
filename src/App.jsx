@@ -3,6 +3,9 @@ import './App.css';
 import ThreeScene from './ThreeScene';
 import React, {useEffect} from 'react';
 import axios from 'axios';
+import Navbar from './components/Navbar';
+import Navmenu from './components/Navmenu';
+
 
 function App() {
   const [color, setColor] = useState(localStorage.getItem('color') || '#ffffff');
@@ -15,14 +18,12 @@ function App() {
   const [useTH, setUseTH] = useState(false);
   const [images, setImages] = useState([]);
 
-  let skinArray = ['#FFF4E6','#FFDAB9','#FFC085','#FFA94D','#F07514','#D45A0F','#B54709','#9C3D06']
-
   const handleColorChange = (event) => setColor(event.target.value);
   const handleImageUpload = (event) => setImage(URL.createObjectURL(event.target.files[0]));
   const handleRotation = (degree) => setImgRotation(prevRotation => prevRotation + degree * (Math.PI / 180));
   const handlePosition = (incrementX, incrementY) => setImgPos(prevPos => ({x: prevPos.x + incrementX, y: prevPos.y + incrementY}));
   const handleScale = (scaleChange) => setImgScale(prevScale => prevScale + scaleChange);
-  const handleSkinToneChange = (event) => setSkinHex(skinArray[event.target.value]);
+  const handleSkinToneChange = (event) => setSkinHex(`hsl(${event.target.value}, 50%, 85%)`);
   const handleMannequin = () => setMannequin(prevMannequin => !prevMannequin);
   function handleHoodie(){setUseTH(prevUseTH => prevUseTH === 0 ? 1 : 0);}
 
@@ -36,6 +37,10 @@ function App() {
   }, []);
 
   return (
+    <div>
+      
+      <Navbar />
+    {/* <h1><span><a href='home.html'>Home</a>&nbsp; &nbsp;</span>Customize in your way</h1> */}
     <div className="container">
       <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin} HoT={useTH}/>
       <div className="other-side element-with-border">
@@ -46,7 +51,7 @@ function App() {
         <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleMannequin()}>add/remove Model</button>
         <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleHoodie()}>change to hoodie</button>
         <br />
-        <input type="range" min="0" max="7" onChange={handleSkinToneChange} />
+        <input type="range" min="0" max="50" onChange={handleSkinToneChange} />
         <br/>
         {image && (
           <>
@@ -73,6 +78,7 @@ function App() {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 }
