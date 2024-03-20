@@ -2,6 +2,7 @@ import { Canvas, useThree, extend, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import tshirtModel from './assets/only-tshirt.glb';
 import mannequin from './assets/mannequin.glb';
+import hoodie from './assets/hoodie.glb';
 import { DoubleSide } from 'three';
 import { MeshPhysicalMaterial, MeshStandardMaterial } from 'three';
 import { OrbitControls as ThreeOrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -31,20 +32,21 @@ const OrbitControls = (props) => {
     );
 };
 
-function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis }) {
-    console.log(skinTex);
+function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis,HoT }) {
+    let inputModel;
+    HoT==1 ? inputModel=hoodie : inputModel=tshirtModel;
     return (
         <Canvas camera={{ position: [0,0.5,1]}}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <Model url={tshirtModel} position={[0,-1.3,0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} imgScale={imgScale} opacity={1}/>
-            <Model url={mannequin} position={[0,-0.3,0]} color={skinTex} opacity={manVis}/>
+            <Model url={inputModel} position={[0,-0.3,0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} imgScale={imgScale} opacity={1}/>
+            <Model url={mannequin} position={[0,-0.3,0]} color={skinTex} opacity={manVis} scale={manVis}/>
             <OrbitControls />
         </Canvas>
     );
 }
 
-function Model({url, position, color = 'white', textureUrl, textureOffset = {x: 0, y: 0}, textureRotation = 1, imgScale = 1, opacity = 0.5}){
+function Model({url, position, color = 'white', textureUrl, textureOffset = {x: 0, y: 0}, textureRotation = 1, imgScale = 1, opacity = 0.5, scale=1}){
     const gltf = useGLTF(url,true);
     const { scene } = gltf;
     let texture = null;
@@ -80,7 +82,7 @@ function Model({url, position, color = 'white', textureUrl, textureOffset = {x: 
             texture.repeat.set(imgScale, imgScale);
         }
     })
-    return <primitive object={scene} position={position} dispose={null}/>;
+    return <primitive object={scene} position={position} scale={scale} dispose={null}/>;
 }
 
 export default ThreeScene;

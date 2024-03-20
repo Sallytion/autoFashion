@@ -14,6 +14,7 @@ function App() {
   const [croppedImage, setCroppedImageUrl] = useState(null);
   const [skinHex, setSkinHex] = useState('#000000');
   const [mannequin, setMannequin] = useState(0);
+  const [useTH, setUseTH] = useState(0);
 
   let imgRot = 0;
 
@@ -118,17 +119,22 @@ function App() {
     mannequin==0 ? setMannequin(1) : setMannequin(0);
   }
 
+  function handleHoodie(event) {
+    useTH==0 ? setUseTH(1) : setUseTH(0);
+  }
+
   console.log(skinHex);
 
   return (
     <div className="container">
-      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin}/>
+      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin} HoT={useTH}/>
       <div className="other-side element-with-border">
         <input type="color" value={color} onChange={handleColorChange} />
         <br />
         <input type="file" onChange={handleImageUpload}/>
         <br />
         <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleMannequin()}>add/remove Model</button>
+        <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleHoodie()}>change to hoodie</button>
         <br />
         <input type="range" min="0" max="50" onChange={handleSkinToneChange} />
         <br/>
