@@ -59,7 +59,7 @@ function Model({ url, position, color = 'white', textureUrl, textureOffset = { x
 
 // ThreeScene component
 function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT }) {
-    const inputModel = HoT === 0 ? tshirtModel : hoodie;
+    const inputModel = HoT === 0 ? hoodie : tshirtModel;
 
     return (
         <Canvas camera={{ position: [0, 0.5, 1] }}>
