@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link ref="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;500;600;700&display=swap">
+    <style>
+      .animatedText {
+        font-size: 50px;
+        font-weight: bold;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0; /* Initially hidden */
+        transition: opacity 1s ease; /* Smooth transition */
+        z-index: 1;
+      }
+
+      .navbar {
+        background-color: #404040;
+        color: black;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.2s ease; /* Smooth transition */
+        z-index: 2;
+      }
+      .navbar a {
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      .logo {
+        padding: 14px 16px;
+      }
+      .nav-links {
+        margin-left: 25%;
+        display: flex;
+        justify-content: flex-start; /* or flex-end, center, space-around */
+        gap: 50px; /* adjust this value to increase or decrease the space between items */
+      }
+      body {
+        padding-top: 50px;
+      }
+
+      .sticky {
+        position: sticky;
+        top: 0;
+      }
+
+      #navbar {
+        display: none;
+      }
+
+      html,
+      body {
+        margin: 0px;
+      }
+
+      header,
+      footer {
+        font-family: Raleway;
+        margin: 0 auto;
+        padding: 5em 3em;
+        text-align: center;
+        background: #555;
+      }
+
+      header h1 {
+        color: #9c3d06;
+        font-size: 40px;
+        font-weight: lighter;
+        margin-bottom: 5px;
+      }
+
+      header span {
+        color: #9c3d06;
+      }
+
+      span {
+        color: #9c3d06;
+      }
+
+      footer span {
+        color: #aaa;
+      }
+
+      div.container {
+        font-family: Raleway;
+        margin: 0 auto;
+        padding: 10em 3em;
+        text-align: center;
+      }
+
+      div.container a {
+        color: #fff;
+        text-decoration: none;
+        font: 20px Raleway;
+        margin: 0px 10px;
+        padding: 10px 10px;
+        position: relative;
+        z-index: 0;
+        cursor: pointer;
+      }
+
+      .teal {
+        background: #ffb15c;
+      }
+
+      /* Border from Y to X  */
+      div.borderYtoX a:before,
+      div.borderYtoX a:after {
+        position: absolute;
+        opacity: 0.5;
+        height: 100%;
+        width: 2px;
+        content: "";
+        background: #fff;
+        transition: all 0.3s;
+      }
+
+      div.borderYtoX a:before {
+        left: 0px;
+        top: 0px;
+      }
+
+      div.borderYtoX a:after {
+        right: 0px;
+        bottom: 0px;
+      }
+
+      div.borderYtoX a:hover:before,
+      div.borderYtoX a:hover:after {
+        opacity: 1;
+        height: 2px;
+        width: 100%;
+      }
+
+      /* Border X get width  */
+      div.borderXwidth a:before,
+      div.borderXwidth a:after {
+        position: absolute;
+        opacity: 0;
+        width: 0%;
+        height: 2px;
+        content: "";
+        background: #fff;
+        transition: all 0.3s;
+      }
+
+      div.borderXwidth a:before {
+        left: 0px;
+        top: 0px;
+      }
+
+      div.borderXwidth a:after {
+        right: 0px;
+        bottom: 0px;
+      }
+
+      div.borderXwidth a:hover:before,
+      div.borderXwidth a:hover:after {
+        opacity: 1;
+        width: 100%;
+      }
+
+      /* Pull down  */
+      div.pullDown a:before {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left: 0px;
+        top: 0px;
+        content: "";
+        background: #fff;
+        opacity: 0.3;
+        transition: all 0.3s;
+      }
+
+      div.pullDown a:hover:before {
+        height: 100%;
+      }
+
+      .logo-motto {
+        text-align: center;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+
+      .navbar {
+        background-color: rgba(255, 178, 91, 0.3);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 1000; /* Ensure navbar stays on top */
+      }
+
+      /* Additional styles for the content below the logo and navbar */
+      .content {
+        padding-top: 120px; /* Adjust as needed based on navbar height */
+      }
+
+      /* Styles for zooming out the logo */
+      .logo {
+        width: 100%; /* Set the width to 100% */
+        height: auto; /* Maintain aspect ratio */
+        transition: transform 0.5s ease;
+      }
+      /* Additional styles for zooming out the logo on scroll */
+      .scrolled .logo {
+        transform: scale(0.5); /* Adjust the scale value as needed */
+      }
+
+      /* Additional styles for revealing the motto on scroll */
+      .scrolled .logo-motto h1 {
+        transform: translateY(0);
+      }
+
+      /* Additional styles for revealing the navbar on scroll */
+      .scrolled .navbar {
+        opacity: 1;
+      }
+      body {
+        background-color: #ffa94d;
+        
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      h1 span {
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+      }
+
+      h1 span:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      h1 span:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      h1 span:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      h1 span:nth-child(4) {
+        animation-delay: 0.8s;
+      }
+      h1 span:nth-child(5) {
+        animation-delay: 1s;
+      }
+      h1 span:nth-child(6) {
+        animation-delay: 1.2s;
+      }
+      h1 span:nth-child(7) {
+        animation-delay: 1.4s;
+      }
+      h1 span:nth-child(8) {
+        animation-delay: 1.6s;
+      }
+      h1 span:nth-child(9) {
+        animation-delay: 1.8s;
+      }
+      h1 span:nth-child(10) {
+        animation-delay: 2s;
+      }
+      h1 span:nth-child(11) {
+        animation-delay: 2.2s;
+      }
+      h1 span:nth-child(12) {
+        animation-delay: 2.4s;
+      }
+      h1 span:nth-child(13) {
+        animation-delay: 2.6s;
+      }
+      h1 span:nth-child(14) {
+        animation-delay: 2.8s;
+      }
+      h1 span:nth-child(15) {
+        animation-delay: 3s;
+      }
+      h1 span:nth-child(16) {
+        animation-delay: 3.2s;
+      }
+      h1 span:nth-child(17) {
+        animation-delay: 3.4s;
+      }
+      h1 span:nth-child(18) {
+        animation-delay: 3.6s;
+      }
+      h1 span:nth-child(19) {
+        animation-delay: 3.8s;
+      }
+      h1 span:nth-child(20) {
+        animation-delay: 4s;
+      }
+      h1 span:nth-child(21) {
+        animation-delay: 4.2s;
+      }
+      h1 span:nth-child(22) {
+        animation-delay: 4.4s;
+      }
+      h1 span:nth-child(23) {
+        animation-delay: 4.6s;
+      }
+
+      .center-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .styled-button {
+        background-color: #4caf50; /* for example */
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      a {
+        margin-right: 20px; /* Adjust the value as needed */
+        font-family: "Arial", sans-serif; /* Change 'Arial' to your desired font */
+      }
+
+      .parent {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20%;
+      }
+
+      .product {
+        background-color: #fce38a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .product:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .product img {
+        max-width: 100%;
+        height: 150px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container teal borderYtoX">
+      <div class="navbar">
+        <div class="nav-links">
+          <img
+            style="
+              height: 20px;
+              width: 20px;
+              margin-left: -300px;
+              margin-right: 180px;
+            "
+            src="logo1.png"
+            alt="logo"
+            class="logo"
+          />
+          <a style="color: black; font-family: 'Inter', sans-serif">HOME</a>
+          <a href="http://localhost:5173/" style="color: black">DESIGN</a>
+          <a href="about.html" style="color: black">ABOUT US</a>
+          <a href="./Contact/contact.html" style="color: black">CONTACT</a>
+          <a href="login.html" style="color: black">LOGIN</a>
+        </div>
+      </div>
+    </div>
+    <div class="text-container">
+      <h1
+        style="
+          font-family: 'Inter', sans-serif;
+          font-size: 85px;
+          color: white;
+          text-shadow: -4px -4px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+            1px 1px 0 black;
+        "
+        class="animatedText"
+        id="gc1"
+      >
+        GET CLOTHED
+      </h1>
+      <h1
+        style="
+          font-family: 'Inter', sans-serif;
+          font-size: 85px;
+          color: #ffd7d7;
+          text-shadow: -4px -4px 0 black, 1px -4px 0 black, -1px 1px 0 black,
+            1px 1px 0 black;
+        "
+        class="animatedText"
+        id="gc2"
+      >
+        GET CLOTHED
+      </h1>
+      <h1
+        style="
+          font-family: 'Inter', sans-serif;
+          font-size: 85px;
+          color: #d9bdbd;
+          text-shadow: -4px -4px 0 black, 1px -4px 0 black, -4px 1px 0 black,
+            1px 1px 0 black;
+        "
+        class="animatedText"
+        id="gc3"
+      >
+        GET CLOTHED
+      </h1>
+      <h1
+        style="
+          font-family: 'Inter', sans-serif;
+          font-size: 85px;
+          color: BLACK;
+          text-shadow: -4px -4px 0 black, 1px -4px 0 black, -4px 1px 0 black,
+            1px 1px 0 black;
+        "
+        class="animatedText"
+        id="gc4"
+      >
+        GET CLOTHED
+      </h1>
+
+      <h1 style="margin-bottom: 400vh"></h1>
+    </div>
+    <img
+      src="rightshirt.jpg"
+      alt="rightshirt"
+      style="position: absolute; right: 0"
+    />
+    <h1 style="clear: both">hello</h1>
+    <img
+      src="leftshirt.jpg"
+      alt="leftshirt"
+      style="position: absolute; top: 450%; left: 0"
+    />
+
+    
+    <div class="parent">
+      
+      <!-- <div class="product">
+        <img
+          
+          src="image1.jpg"
+          alt="Image 1"
+        />
+      </div> -->
+      <div class="product">
+        <a href="http://localhost:5173/" ><img style="height: auto;"  src="image2.jpg" alt="Image 2" /></a>
+      </div>
+      <!-- <div class="product">
+        <img src="image3.jpg" alt="Image 3" />
+      </div> -->
+    </div>
+    <h1 style="text-align: center; font-family: 'Laila', serif;
+    font-weight: 300;
+    font-style: normal;">Design it your waY...</h1>
+  </body>
+  <script>
+    document.getElementsByClassName("animatedText")[0].style.marginTop = "50vh";
+    document.getElementsByClassName("animatedText")[1].style.marginTop = "50vh";
+    document.getElementsByClassName("animatedText")[2].style.marginTop = "50vh";
+    document.getElementsByClassName("animatedText")[3].style.marginTop = "50vh";
+    window.addEventListener("load", function () {
+      var animatedTexts = document.querySelectorAll(".animatedText");
+
+      animatedTexts.forEach(function (text, index) {
+        setTimeout(function () {
+          text.style.opacity = "1";
+        }, index * 500); // Delay each animation by 500ms
+      });
+    });
+
+    window.addEventListener("scroll", function () {
+      var scrollPosition = window.pageYOffset;
+      var totalScrollHeight = window.innerHeight * 4; // 400vh
+
+      var navbar = document.querySelector(".navbar");
+
+      // Calculate the current scroll position as a percentage of the total scroll height
+      var scrollPercentage = scrollPosition / totalScrollHeight;
+
+      // Set the opacity of the navbar
+      navbar.style.opacity = scrollPercentage;
+
+      var gc1 = document.getElementById("gc1");
+      var gc2 = document.getElementById("gc2");
+      var gc3 = document.getElementById("gc3");
+      var gc4 = document.getElementById("gc4");
+
+      gc1.style.top = 50 - scrollPosition * 0.5 + "px";
+      gc2.style.top = 50 - scrollPosition * 0.4 + "px";
+      gc3.style.top = 50 - scrollPosition * 0.3 + "px";
+      gc4.style.top = 50 - scrollPosition * 0.2 + "px";
+    });
+
+    window.addEventListener("scroll", function () {
+      var scrollPosition = window.pageYOffset;
+
+      var gc1 = document.getElementById("gc1");
+      var gc2 = document.getElementById("gc2");
+      var gc3 = document.getElementById("gc3");
+      var gc4 = document.getElementById("gc4");
+
+      gc1.style.top = 50 - scrollPosition * 0.5 + "px";
+      gc2.style.top = 50 - scrollPosition * 0.4 + "px";
+      gc3.style.top = 50 - scrollPosition * 0.3 + "px";
+      gc4.style.top = 50 - scrollPosition * 0.2 + "px";
+    });
+  </script>
+</html>
