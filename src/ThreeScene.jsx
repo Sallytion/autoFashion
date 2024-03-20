@@ -14,6 +14,11 @@ import mannequin_L from './assets/L_size/mannequin.glb';
 import hoodie_L from './assets/L_size/hoodie.glb';
 import jeans_L from './assets/L_size/jeans.glb';
 
+import tshirtModel_S from './assets/S_size/only-tshirt.glb';
+import mannequin_S from './assets/S_size/mannequin.glb';
+import hoodie_S from './assets/S_size/hoodie.glb';
+import jeans_S from './assets/S_size/jeans.glb';
+
 // Extend the OrbitControls from three.js to use in react-three/fiber
 extend({ OrbitControls: ThreeOrbitControls });
 
@@ -70,7 +75,6 @@ function Model({ url, position, color = 'white', textureUrl, textureOffset = { x
 // ThreeScene component
 function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT, textureScale }) {
     const inputModel = HoT === 0 ? hoodie : tshirtModel;
-    console.log(textureScale);
 
     return (
         <Canvas camera={{ position: [0, 0.5, 1] }}>

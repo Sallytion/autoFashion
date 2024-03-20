@@ -17,6 +17,7 @@ function App() {
   const [mannequin, setMannequin] = useState(false);
   const [useTH, setUseTH] = useState(false);
   const [images, setImages] = useState([]);
+  const [selectedSize, setSelectedSize] = useState('S');
 
   const handleColorChange = (event) => setColor(event.target.value);
   const handleImageUpload = (event) => setImage(URL.createObjectURL(event.target.files[0]));
@@ -26,6 +27,10 @@ function App() {
   const handleSkinToneChange = (event) => setSkinHex(`hsl(${event.target.value}, 50%, 85%)`);
   const handleMannequin = () => setMannequin(prevMannequin => !prevMannequin);
   function handleHoodie(){setUseTH(prevUseTH => prevUseTH === 0 ? 1 : 0);}
+  function handleSelectChange(event) {
+    setSelectedSize(event.target.value);
+    console.log(selectedSize);
+  }
 
   // useEffect(() => {
   //   const fetchImages = async () => {
@@ -52,6 +57,12 @@ function App() {
         <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleHoodie()}>change to hoodie</button>
         <br />
         <input type="range" min="0" max="50" onChange={handleSkinToneChange} />
+        <br/>
+        <select onChange={handleSelectChange}>
+          <option value="S">S size</option>
+          <option value="M">M size</option>
+          <option value="L">L size</option>
+        </select>
         <br/>
         {image && (
           <>
