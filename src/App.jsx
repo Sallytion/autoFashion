@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import ThreeScene from './ThreeScene';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 
 function App() {
   const [color, setColor] = useState(localStorage.getItem('color') || '#ffffff');
@@ -11,6 +13,7 @@ function App() {
   const [skinHex, setSkinHex] = useState('#000000');
   const [mannequin, setMannequin] = useState(false);
   const [useTH, setUseTH] = useState(false);
+  const [images, setImages] = useState([]);
 
   const handleColorChange = (event) => setColor(event.target.value);
   const handleImageUpload = (event) => setImage(URL.createObjectURL(event.target.files[0]));
@@ -20,6 +23,15 @@ function App() {
   const handleSkinToneChange = (event) => setSkinHex(`hsl(${event.target.value}, 50%, 85%)`);
   const handleMannequin = () => setMannequin(prevMannequin => !prevMannequin);
   function handleHoodie(){setUseTH(prevUseTH => prevUseTH === 0 ? 1 : 0);}
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const response = await axios.get('https://api.unsplash.com/photos/random?client_id=CLHz001lyqs-ojCEwJqzGO63uqr8ndGWGKJJk3Ff9Rk&count=4');
+      setImages(response.data);
+    };
+
+    fetchImages();
+  }, []);
 
   return (
     <div className="container">
@@ -49,6 +61,15 @@ function App() {
             </div>
           </>
         )}
+        {images.map((image) => (
+          <img 
+            key={image.id} 
+            src={image.urls.small} 
+            alt={image.alt_description} 
+            style={{ maxHeight: '20vh' }} 
+            onClick={() => setImage(image.urls.small)}
+          />
+        ))}
       </div>
     </div>
   );
