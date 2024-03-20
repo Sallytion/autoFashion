@@ -22,14 +22,18 @@ const OrbitControls = (props) => {
 };
 
 // Model component
-function Model({ url, position, color = 'white', textureUrl, textureOffset = { x: 0, y: 0 }, textureRotation, imgScale = 1, opacity = 0.5, scale = 1 }) {
+function Model({ url, position, color = 'white', textureUrl, textureOffset = { x: 0, y: 0 }, textureRotation, imgScale = 1, opacity = 0.5, scale = 1, HoT }) {
     const { scene } = useGLTF(url, true);
     let texture = null;
 
     if (textureUrl) {
+        let offX;
+        let offY;
+        let Rot;
+        HoT === 0 ? (offX = 0.31, offY = 0.1, Rot = -1) : (offX = 0.75, offY = 1.2, Rot = 2.14);
         texture = new TextureLoader().load(textureUrl);
-        texture.offset.set(textureOffset.x +0.75, textureOffset.y +1.2);
-        texture.rotation = textureRotation + 2.14;
+        texture.offset.set(textureOffset.x + offX, textureOffset.y + offY);
+        texture.rotation = textureRotation + Rot;
         console.log(texture.rotation);
         texture.repeat.set(imgScale, imgScale);
     }
@@ -65,8 +69,8 @@ function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotatio
         <Canvas camera={{ position: [0, 0.5, 1] }}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <Model url={inputModel} position={[0, -0.3, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} imgScale={imgScale} opacity={1} />
-            <Model url={mannequin} position={[0, -0.3, 0]} color={skinTex} opacity={manVis} scale={manVis} />
+            <Model HoT={HoT} url={inputModel} position={[0, -0.3, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} imgScale={imgScale} opacity={1} />
+            <Model HoT={HoT} url={mannequin} position={[0, -0.3, 0]} color={skinTex} opacity={manVis} scale={manVis} />
             <OrbitControls />
         </Canvas>
     );

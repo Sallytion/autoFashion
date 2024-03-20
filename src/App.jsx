@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const response = await axios.get('https://api.unsplash.com/photos/random?client_id=CLHz001lyqs-ojCEwJqzGO63uqr8ndGWGKJJk3Ff9Rk&count=4');
+      // const response = await axios.get('https://api.unsplash.com/photos/random?client_id=CLHz001lyqs-ojCEwJqzGO63uqr8ndGWGKJJk3Ff9Rk&count=4');
       setImages(response.data);
     };
 
@@ -56,8 +56,8 @@ function App() {
               <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleRotation(5)}>Rotate Texture</button>
               <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, 0.1)}>Position Y++</button>
               <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, -0.1)}>Position Y--</button>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(0.01)}>Scale++</button>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(-0.01)}>Scale--</button>
+              {/* <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(0.01)}>Scale++</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(-0.01)}>Scale--</button> */}
             </div>
           </>
         )}
