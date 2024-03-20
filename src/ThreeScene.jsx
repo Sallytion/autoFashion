@@ -9,6 +9,11 @@ import mannequin from './assets/mannequin.glb';
 import hoodie from './assets/hoodie.glb';
 import jeans from './assets/jeans.glb';
 
+import tshirtModel_L from './assets/L_size/only-tshirt.glb';
+import mannequin_L from './assets/L_size/mannequin.glb';
+import hoodie_L from './assets/L_size/hoodie.glb';
+import jeans_L from './assets/L_size/jeans.glb';
+
 // Extend the OrbitControls from three.js to use in react-three/fiber
 extend({ OrbitControls: ThreeOrbitControls });
 
@@ -23,9 +28,10 @@ const OrbitControls = (props) => {
 };
 
 // Model component
-function Model({ url, position, color = 'white', textureUrl, textureOffset = { x: 0, y: 0 }, textureRotation, imgScale = 1, opacity = 0.5, scale = 1, HoT }) {
+function Model({ url, position, color = 'white', textureUrl, textureOffset = { x: 0, y: 0 }, textureRotation, imgScale, opacity = 0.5, scale = 1, HoT }) {
     const { scene } = useGLTF(url, true);
     let texture = null;
+    // console.log(imgScale);
 
     if (textureUrl) {
         let offX;
@@ -35,7 +41,6 @@ function Model({ url, position, color = 'white', textureUrl, textureOffset = { x
         texture = new TextureLoader().load(textureUrl);
         texture.offset.set(textureOffset.x + offX, textureOffset.y + offY);
         texture.rotation = textureRotation + Rot;
-        console.log(texture.rotation);
         texture.repeat.set(imgScale, imgScale);
     }
 
@@ -63,14 +68,15 @@ function Model({ url, position, color = 'white', textureUrl, textureOffset = { x
 }
 
 // ThreeScene component
-function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT }) {
+function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT, textureScale }) {
     const inputModel = HoT === 0 ? hoodie : tshirtModel;
+    console.log(textureScale);
 
     return (
         <Canvas camera={{ position: [0, 0.5, 1] }}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <Model HoT={HoT} url={inputModel} position={[0, -0.3, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} imgScale={imgScale} opacity={1} />
+            <Model HoT={HoT} imgScale={textureScale} url={inputModel} position={[0, -0.3, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} opacity={1} />
             <Model HoT={HoT} url={mannequin} position={[0, -0.3, 0]} color={skinTex} scale={manVis} />
             <Model HoT={HoT} url={jeans} position={[0,-0.3,0]} color='darkblue' opacity={1} scale={manVis}/>
             <OrbitControls />

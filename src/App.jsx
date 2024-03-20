@@ -22,19 +22,19 @@ function App() {
   const handleImageUpload = (event) => setImage(URL.createObjectURL(event.target.files[0]));
   const handleRotation = (degree) => setImgRotation(prevRotation => prevRotation + degree * (Math.PI / 180));
   const handlePosition = (incrementX, incrementY) => setImgPos(prevPos => ({x: prevPos.x + incrementX, y: prevPos.y + incrementY}));
-  const handleScale = (scaleChange) => setImgScale(prevScale => prevScale + scaleChange);
+  function handleScale  (scaleChange)  {setImgScale(imgScale + scaleChange)};
   const handleSkinToneChange = (event) => setSkinHex(`hsl(${event.target.value}, 50%, 85%)`);
   const handleMannequin = () => setMannequin(prevMannequin => !prevMannequin);
   function handleHoodie(){setUseTH(prevUseTH => prevUseTH === 0 ? 1 : 0);}
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      // const response = await axios.get('https://api.unsplash.com/photos/random?client_id=CLHz001lyqs-ojCEwJqzGO63uqr8ndGWGKJJk3Ff9Rk&count=4');
-      setImages(response.data);
-    };
+  // useEffect(() => {
+  //   const fetchImages = async () => {
+  //      const response = await axios.get('https://api.unsplash.com/photos/random?client_id=CLHz001lyqs-ojCEwJqzGO63uqr8ndGWGKJJk3Ff9Rk&count=4');
+  //     setImages(response.data);
+  //   };
 
-    fetchImages();
-  }, []);
+  //   fetchImages();
+  // }, []);
 
   return (
     <div>
@@ -64,11 +64,12 @@ function App() {
               <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, 0.1)}>Position Y++</button>
               <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, -0.1)}>Position Y--</button>
               <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(0.1)}>Scale++</button>
+              {/* `{console.log(imgScale)}` */}
               <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(-0.1)}>Scale--</button>
             </div>
           </>
         )}
-        {images.map((image) => (
+        {/* {images.map((image) => (
           <img 
             key={image.id} 
             src={image.urls.small} 
@@ -76,7 +77,7 @@ function App() {
             style={{ maxHeight: '20vh' }} 
             onClick={() => setImage(image.urls.small)}
           />
-        ))}
+        ))} */}
       </div>
     </div>
     </div>
