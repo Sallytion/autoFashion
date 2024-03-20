@@ -19,6 +19,10 @@ function App() {
   const [images, setImages] = useState([]);
   const [selectedSize, setSelectedSize] = useState('S');
 
+  useEffect(() => {
+    console.log(selectedSize);
+  }, [selectedSize]);
+
   const handleColorChange = (event) => setColor(event.target.value);
   const handleImageUpload = (event) => setImage(URL.createObjectURL(event.target.files[0]));
   const handleRotation = (degree) => setImgRotation(prevRotation => prevRotation + degree * (Math.PI / 180));
@@ -29,7 +33,7 @@ function App() {
   function handleHoodie(){setUseTH(prevUseTH => prevUseTH === 0 ? 1 : 0);}
   function handleSelectChange(event) {
     setSelectedSize(event.target.value);
-    console.log(selectedSize);
+    console.log(event.target.value );
   }
 
   // useEffect(() => {
@@ -47,7 +51,7 @@ function App() {
       <Navbar />
     {/* <h1><span><a href='home.html'>Home</a>&nbsp; &nbsp;</span>Customize in your way</h1> */}
     <div className="container">
-      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin} HoT={useTH}/>
+      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin} HoT={useTH} userSize={selectedSize}/>
       <div className="other-side element-with-border">
         <input type="color" value={color} onChange={handleColorChange} />
         <br />

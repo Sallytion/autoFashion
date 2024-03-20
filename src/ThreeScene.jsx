@@ -73,16 +73,35 @@ function Model({ url, position, color = 'white', textureUrl, textureOffset = { x
 }
 
 // ThreeScene component
-function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT, textureScale }) {
-    const inputModel = HoT === 0 ? hoodie : tshirtModel;
+function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT, textureScale, userSize }) {
+    let selectedTshirtModel, selectedMannequin, selectedHoodie, selectedJeans;
+
+    if(userSize === 'S') {
+        selectedTshirtModel = tshirtModel_S;
+        selectedMannequin = mannequin_S;
+        selectedHoodie = hoodie_S;
+        selectedJeans = jeans_S;
+    } else if(userSize === 'L') {
+        selectedTshirtModel = tshirtModel_L;
+        selectedMannequin = mannequin_L;
+        selectedHoodie = hoodie_L;
+        selectedJeans = jeans_L;
+    } else {
+        selectedTshirtModel = tshirtModel;
+        selectedMannequin = mannequin;
+        selectedHoodie = hoodie;
+        selectedJeans = jeans;
+    }
+
+    const inputModel = HoT === 0 ? selectedHoodie : selectedTshirtModel;
 
     return (
         <Canvas camera={{ position: [0, 0.5, 1] }}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
             <Model HoT={HoT} imgScale={textureScale} url={inputModel} position={[0, -0.3, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} opacity={1} />
-            <Model HoT={HoT} url={mannequin} position={[0, -0.3, 0]} color={skinTex} scale={manVis} />
-            <Model HoT={HoT} url={jeans} position={[0,-0.3,0]} color='darkblue' opacity={1} scale={manVis}/>
+            <Model HoT={HoT} url={selectedMannequin} position={[0, -0.3, 0]} color={skinTex} scale={manVis} />
+            <Model HoT={HoT} url={selectedJeans} position={[0,-0.3,0]} color='darkblue' opacity={1} scale={manVis}/>
             <OrbitControls />
         </Canvas>
     );
