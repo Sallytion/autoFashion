@@ -12,6 +12,8 @@ function App() {
   const [rotateImg, setImgRotation] =  useState(1);
   const [crop, setCrop] = useState({ aspect: 1 });
   const [croppedImage, setCroppedImageUrl] = useState(null);
+  const [skinHex, setSkinHex] = useState('#000000');
+  const [mannequin, setMannequin] = useState(0);
 
   let imgRot = 0;
 
@@ -102,14 +104,34 @@ function App() {
   //   localStorage.setItem('color', color);
   // }, [color]);
 
+  function handleSkinToneChange(event) {
+    const hue = event.target.value;
+    const saturation = 50;
+    const lightness = 85;
+  
+    const newSkinHex = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    setSkinHex(newSkinHex); // Update the skinHex state variable
+    console.log(newSkinHex);
+  }
+
+  function handleMannequin(event) {
+    mannequin==0 ? setMannequin(1) : setMannequin(0);
+  }
+
+  console.log(skinHex);
+
   return (
     <div className="container">
-      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} />
+      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin}/>
       <div className="other-side element-with-border">
         <input type="color" value={color} onChange={handleColorChange} />
         <br />
         <input type="file" onChange={handleImageUpload}/>
         <br />
+        <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleMannequin()}>add/remove Model</button>
+        <br />
+        <input type="range" min="0" max="50" onChange={handleSkinToneChange} />
+        <br/>
         {image && (
           <>
             <ReactCrop
