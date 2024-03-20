@@ -51,17 +51,24 @@ function App() {
       <Navbar />
     {/* <h1><span><a href='home.html'>Home</a>&nbsp; &nbsp;</span>Customize in your way</h1> */}
     <div className="container">
-      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin} HoT={useTH} userSize={selectedSize}/>
+      <ThreeScene color={color} textureUrl={image} textureOffset={imgPos} textureScale={imgScale} textureRotation={rotateImg} skinTex={skinHex} manVis={mannequin} HoT={useTH}/>
       <div className="other-side element-with-border">
-        <input type="color" value={color} onChange={handleColorChange} />
-        <br />
+        
         <input type="file" onChange={handleImageUpload}/>
         <br />
-        <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleMannequin()}>add/remove Model</button>
-        <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleHoodie()}>change to hoodie</button>
+        <br />
+        
+        <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleMannequin()}>Add/Remove Model</button>
+        &nbsp;
+        <button stype={{ padding: '10px', margin: '5px' }} onClick={() => handleHoodie()}>Change type</button>
+        <br />
         <br />
         <input type="range" min="0" max="50" onChange={handleSkinToneChange} />
         <br/>
+        
+
+        <input type="color" value={color} onChange={handleColorChange} />
+        <br />
         <select onChange={handleSelectChange}>
           <option value="S">S size</option>
           <option value="M">M size</option>
@@ -73,17 +80,19 @@ function App() {
             <img src={image} alt="Uploaded content" width="50%"/>
             <br />
             <div style={{ width: '50%', margin: 'auto' }}>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0.1, 0)}>Position X++</button>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(-0.1, 0)}>Position X--</button>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleRotation(5)}>Rotate Texture</button>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, 0.1)}>Position Y++</button>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, -0.1)}>Position Y--</button>
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(0.1)}>Scale++</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0.1, 0)}>Left</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(-0.1, 0)}>Right</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleRotation(5)}>Anti-Clockwise</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, 0.1)}>Down</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handlePosition(0, -0.1)}>Up</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(0.1)}>Zoom In</button>
               {/* `{console.log(imgScale)}` */}
-              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(-0.1)}>Scale--</button>
+              <button style={{ padding: '10px', margin: '5px' }} onClick={() => handleScale(-0.1)}>Zoom Out</button>
             </div>
           </>
         )}
+        <br />
+          <h2>Confused? Check for designs!</h2>
         {/* {images.map((image) => (
           <img 
             key={image.id} 
@@ -97,6 +106,7 @@ function App() {
     </div>
     </div>
   );
+
 }
 
 export default App;
