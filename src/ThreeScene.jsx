@@ -100,8 +100,8 @@ function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotatio
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
             <Model HoT={HoT} imgScale={textureScale} rotation={[0, modRot, 0]} url={inputModel} position={[0, 0, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} opacity={1} />
-            <Model HoT={HoT} url={selectedMannequin} position={[0, 0, 0]} color={skinTex} scale={manVis} />
-            <Model HoT={HoT} url={selectedJeans} position={[0,0,0]} color='darkblue' opacity={1} scale={manVis}/>
+            <Model HoT={HoT} url={selectedMannequin} rotation={[0,modRot,0]} position={[0, 0, 0]} color={skinTex} scale={manVis} />
+            <Model HoT={HoT} url={selectedJeans} rotation={[0,modRot,0]} position={[0,0,0]} color='darkblue' opacity={1} scale={manVis}/>
             <OrbitControls />
         </Canvas>
     );
