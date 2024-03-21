@@ -33,7 +33,7 @@ const OrbitControls = (props) => {
 };
 
 // Model component
-function Model({ url, position, color = 'white', textureUrl, textureOffset = { x: 0, y: 0 }, textureRotation, imgScale, opacity = 0.5, scale = 1, HoT }) {
+function Model({ url, position, rotation = [0, 0, 0], color = 'white', textureUrl, textureOffset = { x: 0, y: 0 }, textureRotation, imgScale, opacity = 0.5, scale = 1, HoT }) {
     const { scene } = useGLTF(url, true);
     let texture = null;
     // console.log(imgScale);
@@ -69,11 +69,11 @@ function Model({ url, position, color = 'white', textureUrl, textureOffset = { x
         }
     });
 
-    return <primitive object={scene} position={position} scale={scale} dispose={null} />;
+    return <primitive object={scene} position={position} rotation={rotation} scale={scale} dispose={null} />;
 }
 
 // ThreeScene component
-function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT, textureScale, userSize }) {
+function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotation, imgScale, skinTex, manVis, HoT, textureScale, userSize, modRot }) {
     let selectedTshirtModel, selectedMannequin, selectedHoodie, selectedJeans;
 
     if(userSize === 'S') {
@@ -94,14 +94,14 @@ function ThreeScene({ color = 'white', textureUrl, textureOffset, textureRotatio
     }
 
     const inputModel = HoT === 0 ? selectedHoodie : selectedTshirtModel;
-
+    console.log(modRot);
     return (
-        <Canvas camera={{ position: [0, 0.5, 1] }}>
+        <Canvas camera={{ position: [0, 0.3, 1.5] }}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <Model HoT={HoT} imgScale={textureScale} url={inputModel} position={[0, -0.3, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} opacity={1} />
-            <Model HoT={HoT} url={selectedMannequin} position={[0, -0.3, 0]} color={skinTex} scale={manVis} />
-            <Model HoT={HoT} url={selectedJeans} position={[0,-0.3,0]} color='darkblue' opacity={1} scale={manVis}/>
+            <Model HoT={HoT} imgScale={textureScale} rotation={[0, modRot, 0]} url={inputModel} position={[0, 0, 0]} color={color} textureUrl={textureUrl} textureOffset={textureOffset} textureRotation={textureRotation} opacity={1} />
+            <Model HoT={HoT} url={selectedMannequin} position={[0, 0, 0]} color={skinTex} scale={manVis} />
+            <Model HoT={HoT} url={selectedJeans} position={[0,0,0]} color='darkblue' opacity={1} scale={manVis}/>
             <OrbitControls />
         </Canvas>
     );
